@@ -1,43 +1,70 @@
 package ru.netology;
 
 public class Radio {
+    private int firstStation = 0;
+    private int lastStation = 9;
     private int currentStation;
     private int currentVolume;
 
-    public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation <= 9) {
-            currentStation = newCurrentStation;
-        }
-
+    public Radio(int number) {
+        this.lastStation = number -1;
+        this.firstStation = 0;
+        this.currentStation = getCurrentStation();
     }
+
+    public Radio() {
+        this.firstStation = getFirstStation();
+        this.lastStation = getLastStation();
+        this.currentStation = getCurrentStation();
+    }
+
+    public void setCurrentStation(int newCurrentStation) {
+        if (newCurrentStation <= getLastStation()) {
+            currentStation = newCurrentStation;
+        } else {
+            currentStation = firstStation;
+        }
+    }
+
+    public int getFirstStation() {
+
+        return firstStation;
+    }
+
+    public int getLastStation() {
+
+        return lastStation;
+    }
+
 
     public int getCurrentStation() {
         return currentStation;
     }
 
-    public void setNextStation() {
+    public void nextStation() {
         int station = getCurrentStation();
-        if (station < 9) {
-            station++;
-            setCurrentStation(station);
+        if (station <= getLastStation()) {
+        station++;
+        setCurrentStation(station);
+    }// else {
+      //  setCurrentStation(getFirstStation());
+   // }
 
-        } else {
-            setCurrentStation(0);
-        }
-    }
+}
 
 
-    public void setPrevStation() {
+
+    public void prevStation() {
         int station = getCurrentStation();
-        if (station > 0) {
+        if (station > getFirstStation()) {
             station--;
             setCurrentStation(station);
         } else {
-            setCurrentStation(9);
+            setCurrentStation(getLastStation());
         }
-
-
     }
+
+
 
     public int getCurrentVolume() {
         return currentVolume;
