@@ -3,48 +3,53 @@ import org.junit.jupiter.api.Test;
 import ru.netology.Radio;
 
 public class RadioTest {
-   Radio station = new Radio(160);
-   @Test
-   public void shouldNotSetStationOverLimit() {
-       station.setCurrentStation(178);
-       int expected = 0;
-       int actual = station.getCurrentStation();
-       Assertions.assertEquals(expected, actual);
+    Radio station = new Radio(10);
 
-   }
-   @Test
-   public void shouldNotSetNextStationOverLimit() {
-      station.setCurrentStation(159);
-      station.nextStation();
-      int actual = station.getCurrentStation();
-      int expected = 0;
-      Assertions.assertEquals(expected , actual);
-   }
-   @Test
-   public void shouldNotSetPrevStationUnderLimit() {
-       station.setCurrentStation(0);
-       station.prevStation();
-       int actual = station.getCurrentStation();
-       int expected = 159;
-       Assertions.assertEquals(expected , actual);
+    @Test
+    public void shouldNotSetStationOverLimit() {
+        station.setCurrentStation(178);
+        int expected = 0;
+        int actual = station.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
 
-   }
-   @Test
-   public void shouldSetNextStation() {
-       station.setCurrentStation(98);
-       station.nextStation();
-       int actual = station.getCurrentStation();
-       int expected = 99;
-       Assertions.assertEquals(expected , actual);
-   }
-   @Test
-   public  void shouldSetPrevStation() {
-      station.setCurrentStation(69);
-      station.prevStation();
-      int actual = station.getCurrentStation();
-      int expected = 68;
-      Assertions.assertEquals(expected, actual);
-   }
+    }
+
+    @Test
+    public void shouldNotSetNextStationOverLimit() {
+        station.setCurrentStation(9);
+        station.nextStation();
+        int actual = station.getCurrentStation();
+        int expected = 0;
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetPrevStationUnderLimit() {
+        station.setCurrentStation(0);
+        station.prevStation();
+        int actual = station.getCurrentStation();
+        int expected = 9;
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldSetNextStation() {
+        station.setCurrentStation(7);
+        station.nextStation();
+        int actual = station.getCurrentStation();
+        int expected = 8;
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetPrevStation() {
+        station.setCurrentStation(6);
+        station.prevStation();
+        int actual = station.getCurrentStation();
+        int expected = 5;
+        Assertions.assertEquals(expected, actual);
+    }
 
     @Test
     public void shouldIncreaseVolume() {
