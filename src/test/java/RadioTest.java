@@ -3,64 +3,51 @@ import org.junit.jupiter.api.Test;
 import ru.netology.Radio;
 
 public class RadioTest {
-    @Test
-    public void shouldSetStation() {
-        Radio station = new Radio();
-        station.setCurrentStation(2);
-        int expected = 2;
-        int actual = station.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
-
-    }
+    Radio station = new Radio(10);
 
     @Test
     public void shouldNotSetStationOverLimit() {
-        Radio station = new Radio();
-        station.setCurrentStation(25);
+        station.setCurrentStation(178);
         int expected = 0;
         int actual = station.getCurrentStation();
         Assertions.assertEquals(expected, actual);
+
     }
 
+    @Test
+    public void shouldNotSetNextStationOverLimit() {
+        station.setCurrentStation(9);
+        station.nextStation();
+        int actual = station.getCurrentStation();
+        int expected = 0;
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetPrevStationUnderLimit() {
+        station.setCurrentStation(0);
+        station.prevStation();
+        int actual = station.getCurrentStation();
+        int expected = 9;
+        Assertions.assertEquals(expected, actual);
+
+    }
 
     @Test
     public void shouldSetNextStation() {
-        Radio station = new Radio();
-        station.setCurrentStation(5);
-        station.setNextStation();
-        int expected = 6;
+        station.setCurrentStation(7);
+        station.nextStation();
         int actual = station.getCurrentStation();
+        int expected = 8;
         Assertions.assertEquals(expected, actual);
     }
-
-    @Test
-    public void shouldSetNextStationToBeginning() {
-        Radio station = new Radio();
-        station.setCurrentStation(9);
-        station.setNextStation();
-        int expected = 0;
-        int actual = station.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
-    }
-
 
     @Test
     public void shouldSetPrevStation() {
-        Radio station = new Radio();
-        station.setCurrentStation(7);
-        station.setPrevStation();
-        int expected = 6;
+        station.setCurrentStation(6);
+        station.prevStation();
         int actual = station.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetPrevStationToEnd() {
-        Radio station = new Radio();
-        station.setCurrentStation(0);
-        station.setPrevStation();
-        int expected = 9;
-        int actual = station.getCurrentStation();
+        int expected = 5;
         Assertions.assertEquals(expected, actual);
     }
 
